@@ -1,0 +1,51 @@
+include:
+  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.1.0/workflow-before.yml'
+  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.1.0/workflow-baking.yml'
+  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.1.0/workflow-uploading.yml'
+  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.1.0/workflow-delivering.yml'
+  
+stages:
+  - prebuild
+  - build
+  - postbuild
+  - deploy
+  - postdeploy
+
+Baking:
+  stage: build
+  before_script:
+    - !reference [.unified-before-base, script]
+    - !reference [.unified-before-docker, script]
+  script:
+    - !reference [.unified-workflow-baking, script]
+  only:
+    - branches
+  except:
+    - tags
+  tags:
+    - unified-pipeline-servers
+
+Tapping:
+  stage: build
+  before_script:
+    - !reference [.unified-before-base, script]
+    - !reference [.unified-before-docker, script]
+  script:
+    - !reference [.unified-workflow-tagging, script]
+  only:
+    - tags
+  tags:
+    - unified-pipeline-servers
+
+Uploading:
+  stage: postbuild
+  before_script:
+    - !reference [.unified-before-base, script]
+    - !reference [.unified-before-upload, script]
+  script:
+    - !reference [.unified-workflow-uploading, script]
+  only:
+    - branches
+    - tags
+  tags:
+    - unified-pipeline-servers
