@@ -15,7 +15,8 @@ Baking:
     - !reference [.unified-before-base, script]
     - !reference [.unified-before-docker, script]
   script:
-    - !reference [.unified-workflow-baking, script]
+    - !reference [.unified-baking-common, script]
+    - !reference [.unified-baking-docker, script]
   only:
     - branches
   except:
@@ -29,7 +30,8 @@ Tapping:
     - !reference [.unified-before-base, script]
     - !reference [.unified-before-docker, script]
   script:
-    - !reference [.unified-workflow-tagging, script]
+    - !reference [.unified-baking-common, script]
+    - !reference [.unified-tapping-docker, script]
   only:
     - tags
   tags:
