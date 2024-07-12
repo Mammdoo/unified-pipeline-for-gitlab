@@ -1,6 +1,6 @@
 include:
-  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.2.0/workflow-before.yml'
-  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.2.0/workflow-baking.yml'
+  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.1.0/workflow-before.yml'
+  - remote: 'https://raw.githubusercontent.com/Mammdoo/gitlab-ci-script/0.1.0/workflow-baking.yml'
 
 stages:
   - prebuild
